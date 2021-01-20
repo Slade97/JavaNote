@@ -1,3 +1,5 @@
+package utils;
+
 public class MyLinkedList {
     private ListNode head;
     private int size=0;
@@ -75,9 +77,9 @@ public class MyLinkedList {
 
     public static void main(String[] args) {
         MyLinkedList list=new MyLinkedList();
-        list.insertNth(5,0);
-        list.insertNth(5,1);
-        System.out.println(list.toString());
+        list.insertNth(0,0);
+        list.insertNth(1,1);
+        System.out.println(list.getVal(1));
     }
 
     class ListNode{ //
