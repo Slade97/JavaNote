@@ -8,9 +8,18 @@ public class MyLinkedList {
         head=newNode;
     }
 
-    public void insertNth(int data,int position){
+    public ListNode getHead() {
+        return head;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void insertNth(int data, int position){
         if(position==0){
             insertHead(data);
+            size++;
         }else {
             ListNode cur=head;
             for (int i = 1; i <position ; i++) {
@@ -19,6 +28,7 @@ public class MyLinkedList {
             ListNode newNode=new ListNode(data);
             newNode.next=cur.next;
             cur.next=newNode;
+            size++;
         }
     }
     public void deleteHead(){
@@ -37,7 +47,25 @@ public class MyLinkedList {
         }
     }
 
-     class ListNode{ //
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        ListNode cur=head;
+        for (int i = 0; i <size ; i++) {
+            sb.append(cur.val);
+            cur=cur.next;
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        MyLinkedList list=new MyLinkedList();
+        list.insertNth(5,0);
+        list.insertNth(5,1);
+        System.out.println(list.toString());
+    }
+
+    class ListNode{ //
         int val;
         ListNode next; //
         ListNode(int x){ //
