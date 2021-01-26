@@ -19,6 +19,8 @@ public class MergeSort {
      * @param array
      * @return
      */
+
+    public static int[] result;
     public static int[] MergeSort(int[] array) {
         if (array.length < 2) return array;
         int mid = array.length / 2;
@@ -34,7 +36,7 @@ public class MergeSort {
      * @return
      */
     public static int[] merge(int[] left, int[] right) {
-        int[] result = new int[left.length + right.length];
+        result = new int[left.length + right.length];
         for (int index = 0, i = 0, j = 0; index < result.length; index++) {
             if (i >= left.length)
                 result[index] = right[j++];
