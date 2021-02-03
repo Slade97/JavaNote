@@ -41,6 +41,31 @@ public class HFMTree {
         }
         return map;
     }
+    public String enCode(String str){
+        StringBuilder sb=new StringBuilder();
+        char[]chars=str.toCharArray();
+        for (char c : chars) {
+            for (HfmNode node : leafs) {
+                if(c==node.chars.charAt(0)){
+                    String code="";
+                    HfmNode current=node;
+                    do{
+                        if(current.parent!=null&&current==current.parent.left){//说明当前点是左边
+
+                            code="0"+code;
+                        }else {
+                            code="1"+code;
+                        }
+                    }while (current.parent!=null);
+                    sb.append(code);
+                    break;
+                }
+            }
+        }
+        return sb.toString();
+    }
+    //密文-》原始字符串
+    public String deCode(String str){return null;}
     public void createTree(){
         Character keys[]=weights.keySet().toArray(new Character[0]);//拿出所有的点
         PriorityQueue<HfmNode> priorityQueue=new PriorityQueue<HfmNode>();//jdk底层的优先队列
