@@ -76,3 +76,49 @@ data[3]:0000 0000 0000 0000 0000 0000 0000 0000
 66/32=2   66%32=2，所以就在data[2]的第二位上去找，看这位数字是否为1即可。
 ```
 
+时间复杂度是O[1]。
+
+```java
+public class BitMap {
+    byte[]bits;
+    int max;
+
+    public BitMap(int max){
+        this.max=max;
+        bits=new byte[(max>>3)+1];
+    }
+    public void add(int n){
+        int bitsIndex=n>>3;//在哪个byte
+        int loc=n%8;//这个可以用&运算
+
+        //下面我们把bit数组里面的bitsIndex这个下标的byte里面的第loc个bit位置为1
+        bits[bitsIndex] |=1<<loc;
+    }
+    public boolean find(int n){
+        int bitsIndex=n>>3;//在哪个byte
+        int loc=n%8;//这个可以用&运算
+
+        int flag=bits[bitsIndex]&(1<<loc);
+        if(flag==0) return false;
+        return true;
+    }
+
+    public static void main(String[] args) {
+        BitMap bitmap=new BitMap(100);
+        bitmap.add(2);
+        bitmap.add(3);
+        bitmap.add(65);
+        bitmap.add(66);
+
+        System.out.println(bitmap.find(3));
+        System.out.println(bitmap.find(64));
+    }
+}
+
+```
+
+能解决的问题：
+
+- 数据判重
+- 对没有重复的数据排序，既然处理不了重复的数据（因为位运算是0和1），那么也处理补了哈希冲突。**范围问题**，假设0到10亿的10个数，我们用bitmap的话需要开10亿/32个空间，如果用hashmap只需要用10个就好了
+- 根据前两条可以扩展出很多其他的应用，比如找不重复的数，统计数据等
